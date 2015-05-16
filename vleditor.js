@@ -71,6 +71,80 @@ VLEditor.textSizeChooser.buildMenu=function(){
     retS+='</ul></div>';
     return retS;
 };
+
+/* linkCreator: build a link*/
+VLEditor.linkCreator={};
+VLEditor.linkCreator.toggle=function(idStr){
+
+    var form=$(idStr+" .vleditor-linkCreator-form");
+    var editor=$(idStr+" .vleditor-editor");
+    var i;
+    if (form.css("display") === "none"){
+        //save the selected range
+        var selectionObj=getSelection();
+        VLEditor.linkCreator.selectedRangeList=[];
+        for (i=0;i<selectionObj.rangeCount;++i){
+            VLEditor.linkCreator.selectedRangeList.push(selectionObj.getRangeAt(i));
+        }
+        var offLeft=editor.position().left+(editor.width()-form.width())/2;
+        var offTop=editor.position().top+(editor.height()-form.height())/2;
+        form.css("left",offLeft);
+        form.css("top",offTop);
+        form.fadeIn();
+    }else{
+        //editor["0"].contentEditable="true";
+        document.getSelection().removeAllRanges();
+        for (i=0;i<VLEditor.linkCreator.selectedRangeList.length;++i){
+            document.getSelection().addRange(VLEditor.linkCreator.selectedRangeList[i]);
+        }
+        form.fadeOut();
+    }
+};
+VLEditor.linkCreator.buildFormHTML=function(){
+    retS='<div class="vleditor-linkCreator-form" style="position:absolute;padding:2em;border:1px solid grey; background-color:rgba(255,255,255,0.8);display:none;">';
+    retS+='Link Target URL:<input type="text" class="vleditor-linkCreator-form-url" />';
+    retS+='<a href="#" class="vleditor-btn vleditor-linkCreator-form-ok"><img src="res/Checkmark-50.png"></a>'
+    retS+='<a href="#" class="vleditor-btn vleditor-linkCreator-form-cancel"><img src="res/Crossmark-50.png"></a>';
+    retS+="</div>";
+    return retS;
+};
+/* imageInserter: insert a image */
+VLEditor.imageInserter={};
+VLEditor.imageInserter.toggle=function(idStr){
+    var form=$(idStr+" .vleditor-imageInsert-form");
+    var editor=$(idStr+" .vleditor-editor");
+    var i;
+    if (form.css("display") === "none"){
+        //save the selected range
+        var selectionObj=getSelection();
+        VLEditor.imageInserter.selectedRangeList=[];
+        for (i=0;i<selectionObj.rangeCount;++i){
+            VLEditor.imageInserter.selectedRangeList.push(selectionObj.getRangeAt(i));
+        }
+        var offLeft=editor.position().left+(editor.width()-form.width())/2;
+        var offTop=editor.position().top+(editor.height()-form.height())/2;
+        form.css("left",offLeft);
+        form.css("top",offTop);
+        form.fadeIn();
+    }else{
+        //editor["0"].contentEditable="true";
+        document.getSelection().removeAllRanges();
+        for (i=0;i<VLEditor.imageInserter.selectedRangeList.length;++i){
+            document.getSelection().addRange(VLEditor.imageInserter.selectedRangeList[i]);
+        }
+        form.fadeOut();
+    }
+};
+VLEditor.imageInserter.buildFormHTML=function(){
+    retS='<div class="vleditor-imageInsert-form" style="position:absolute;padding:2em;border:1px solid grey; background-color:rgba(255,255,255,0.8);display:none;">';
+    retS+='Image File URL:<input type="text" class="vleditor-imageInsert-form-url" />';
+    retS+='<a href="#" class="vleditor-btn vleditor-imageInsert-form-ok"><img src="res/Checkmark-50.png"></a>'
+    retS+='<a href="#" class="vleditor-btn vleditor-imageInsert-form-cancel"><img src="res/Crossmark-50.png"></a>';
+    retS+="</div>";
+    return retS;
+};
+
+
  /** build_vleditor_html
   *  to build a basic editor form based on contenteditable DIV block.
   */
@@ -89,11 +163,16 @@ VLEditor.build_vleditor_html=function(contentHTML) {
      retS+='<a href="#" class="vleditor-btn vleditor-outdent-btn"><img src="res/Outdent-50.png" alt="outdent"></a>';
      retS+='<a href="#" class="vleditor-btn vleditor-unorderedlist-btn"><img src="res/List.png" alt="unorderedlist"></a>';
      retS+='<a href="#" class="vleditor-btn vleditor-orderedlist-btn"><img src="res/OrderedList-50.png" alt="orderedlist"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-link-btn"><img src="res/Link-50.png" alt="link"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-unlink-btn"><img src="res/DeleteLink-50.png" alt="link"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-insertimage-btn"><img src="res/InsertImage-50.png" alt="link"></a>';
      retS+='<a href="#" class="vleditor-btn vleditor-textcolor-btn"><img src="res/TextColor-50.png" alt="textcolor"></a>';
      retS+='<a href="#" class="vleditor-btn vleditor-textsize-btn"><img src="res/TextSize.png" alt="textsize"></a>';
      retS+='</div>';
      retS+=VLEditor.textColorChooser.buildMenu();
      retS+=VLEditor.textSizeChooser.buildMenu();
+     retS+=VLEditor.linkCreator.buildFormHTML();
+     retS+=VLEditor.imageInserter.buildFormHTML();
      //content-part
      retS+='<div class="vleditor-editor" contenteditable="true" >';
      retS+=contentHTML;
@@ -222,6 +301,32 @@ VLEditor.buildEditor=function(id){
         VLEditor.textSizeChooser.toggle(idStr);
         var textSize=$(this).parent().index();
         document.execCommand("fontSize",false,textSize);
+    });
+
+    //link btn
+    $(idStr+" .vleditor-link-btn").click(function(){
+        VLEditor.linkCreator.toggle(idStr);
+    });
+    $(idStr+" .vleditor-linkCreator-form-cancel").click(function(){
+        VLEditor.linkCreator.toggle(idStr);
+    });
+    $(idStr+" .vleditor-linkCreator-form-ok").click(function(){
+        VLEditor.linkCreator.toggle(idStr);
+        document.execCommand("createLink",false,$(idStr+" .vleditor-linkCreator-form-url").val());
+    });
+    $(idStr+" .vleditor-unlink-btn").click(function(){
+        document.execCommand("unlink",false);
+    });
+    //image btn
+    $(idStr+" .vleditor-insertimage-btn").click(function(){
+        VLEditor.imageInserter.toggle(idStr);
+    });
+    $(idStr+" .vleditor-imageInsert-form-cancel").click(function(){
+        VLEditor.imageInserter.toggle(idStr);
+    });
+    $(idStr+" .vleditor-imageInsert-form-ok").click(function(){
+        VLEditor.imageInserter.toggle(idStr);
+        document.execCommand("insertImage",false,$(idStr+" .vleditor-imageInsert-form-url").val());
     });
 
     $(idStr+" .vleditor-btn").click(function(){

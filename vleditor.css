@@ -4,14 +4,14 @@
  */
 .vleditor-editor{
     border: 1px solid grey;
-    width:300px;
-    height:200px;
+    width:600px;
+    height:400px;
     overflow:scroll;
 }
 .vleditor-editor p{
     margin:0.5em 0;
 }
-.vleditor-btnbar img{
+.vleditor-btn img{
     height:1em;
     width:1em;
     border:1px solid transparent;

@@ -4,6 +4,7 @@
 Mengxiao Lin <linmx0130@163.com><br/>
 All rights reserved.
 
+*Attention* : Alpha version, don't use this project in real world!
 Default icons is created by http://www.icons8.com, published under CC-by-nd 3.0 Unported.
 
 ##Features
