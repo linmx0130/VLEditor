@@ -5,6 +5,7 @@ Mengxiao Lin <linmx0130@163.com><br/>
 All rights reserved.
 
 *Attention* : Alpha version, don't use this project in real world!
+
 Default icons is created by http://www.icons8.com, published under CC-by-nd 3.0 Unported.
 
 ##Features
@@ -13,9 +14,12 @@ Default icons is created by http://www.icons8.com, published under CC-by-nd 3.0 
 * Lightweight and simple
 * Full of comments and hackable.
 
+##How TO
+Please read [howto.md](howto.md) for more details.
+
 ##Why I build it
 * I need a lightweight editor for my course project.
-* It's a course project so my teacher forbid me to use any other javascript library except jQuery. (T,T)
+* It's a course project so my teacher forbad me to use any other javascript library except jQuery. (T,T)
 
 That's why I build this project while I know there are good free WYSIWYG editors.
 
