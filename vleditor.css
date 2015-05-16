@@ -1,0 +1,20 @@
+/* VLEditor vleditor.js
+ * Mengxiao Lin <linmx0130@163.com>
+ * All rights reserved.
+ */
+.vleditor-editor{
+    border: 1px solid grey;
+    width:300px;
+    height:200px;
+    overflow:scroll;
+}
+.vleditor-btnbar img{
+    height:1em;
+    width:1em;
+}
+.vleditor-btn:hover img{
+    border:1px solid grey;
+}
+.vleditor-btn{
+    padding:0.1em;
+}
