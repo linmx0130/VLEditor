@@ -11,10 +11,15 @@
 .vleditor-btnbar img{
     height:1em;
     width:1em;
+    border:1px solid transparent;
 }
 .vleditor-btn:hover img{
     border:1px solid grey;
 }
-.vleditor-btn{
+.vleditor-btn {
     padding:0.1em;
+}
+.vleditor-btn-chosen img{
+    background-color: rgba(148, 148, 148, 0.75);
+    border: 1px solid #828282;
 }
