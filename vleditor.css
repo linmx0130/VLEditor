@@ -8,6 +8,9 @@
     height:200px;
     overflow:scroll;
 }
+.vleditor-editor p{
+    margin:0.5em 0;
+}
 .vleditor-btnbar img{
     height:1em;
     width:1em;

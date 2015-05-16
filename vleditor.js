@@ -5,11 +5,75 @@
 
 var VLEditor={};  //namespace
 
+
+VLEditor.textColorChooser={}; //textColorChooser
+/* color List
+ * echo item follows the format: [color value, color name]
+ */
+VLEditor.textColorChooser.colorList=[
+    ["#FF0000","Red"],
+    ["#00FF00","Green"],
+    ["#0000FF","Blue"],
+    ["#000000","Black"]
+];
+/*toggle: toggle the menu*/
+VLEditor.textColorChooser.toggle=function(idStr){
+    var offLeft=$(idStr+" .vleditor-textcolor-btn").position().left;
+    var offTop=$(idStr+" .vleditor-textcolor-btn").position().top+$(idStr+" .vleditor-textcolor-btn").height();
+    menuDiv=$(idStr+" .vleditor-textColorMenu");
+    menuDiv.css("left",offLeft);
+    menuDiv.css("top",offTop);
+    $(idStr+" .vleditor-textColorMenu").fadeToggle();
+};
+VLEditor.textColorChooser.buildMenu=function(){
+    var i;
+    retS="";
+    retS+='<div class="vleditor-textColorMenu" style="position:absolute;display:none;border:1px solid grey;background-color:white;">'
+    retS+="<ul style='list-style-type:none;list-style-position:outside;padding:0px;margin:0px;'>";
+    for (i=0;i<VLEditor.textColorChooser.colorList.length;++i){
+        retS+='<li style="padding:0px;margin:0px;"><a href="#" class="vleditor-textColorMenu-btn"';
+        retS+=' style="text-decoration:none;font-size:0.8em;color:';
+        retS+=VLEditor.textColorChooser.colorList[i][0]+'">';
+        retS+=VLEditor.textColorChooser.colorList[i][1]+'</a></li>';
+    }
+    retS+='</ul></div>';
+    return retS;
+};
+
+VLEditor.textSizeChooser={}; //textSizeChooser
+/* text size List
+ * echo item is the name of a size, for 1-7
+ * the first(0) must be null
+ */
+VLEditor.textSizeChooser.sizeList=[
+    null,"XXS","XS", "S","M","L","XL","XXL"
+];
+/*toggle: toggle the menu*/
+VLEditor.textSizeChooser.toggle=function(idStr){
+    var offLeft=$(idStr+" .vleditor-textsize-btn").position().left;
+    var offTop=$(idStr+" .vleditor-textsize-btn").position().top+$(idStr+" .vleditor-textsize-btn").height();
+    menuDiv=$(idStr+" .vleditor-textSizeMenu");
+    menuDiv.css("left",offLeft);
+    menuDiv.css("top",offTop);
+    $(idStr+" .vleditor-textSizeMenu").fadeToggle();
+};
+VLEditor.textSizeChooser.buildMenu=function(){
+    var i;
+    retS="";
+    retS+='<div class="vleditor-textSizeMenu" style="position:absolute;display:none;border:1px solid grey;background-color:white;">'
+    retS+="<ul style='list-style-type:none;list-style-position:outside;padding:0px;margin:0px;'>";
+    for (i=1;i<VLEditor.textSizeChooser.sizeList.length;++i){
+        retS+='<li style="padding:0px;margin:0px;"><a href="#" style="text-decoration:none;color:black;" class="vleditor-textSizeMenu-btn">';
+        retS+='<font size="'+i+'">'
+        retS+=VLEditor.textSizeChooser.sizeList[i];
+        retS+='</font></a></li>';
+    }
+    retS+='</ul></div>';
+    return retS;
+};
  /** build_vleditor_html
   *  to build a basic editor form based on contenteditable DIV block.
   */
-
-
 VLEditor.build_vleditor_html=function(contentHTML) {
      var retS='<div class="vleditor-btnbar">';
      //button bar part
@@ -25,8 +89,11 @@ VLEditor.build_vleditor_html=function(contentHTML) {
      retS+='<a href="#" class="vleditor-btn vleditor-outdent-btn"><img src="res/Outdent-50.png" alt="outdent"></a>';
      retS+='<a href="#" class="vleditor-btn vleditor-unorderedlist-btn"><img src="res/List.png" alt="unorderedlist"></a>';
      retS+='<a href="#" class="vleditor-btn vleditor-orderedlist-btn"><img src="res/OrderedList-50.png" alt="orderedlist"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-textcolor-btn"><img src="res/TextColor-50.png" alt="textcolor"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-textsize-btn"><img src="res/TextSize.png" alt="textsize"></a>';
      retS+='</div>';
-
+     retS+=VLEditor.textColorChooser.buildMenu();
+     retS+=VLEditor.textSizeChooser.buildMenu();
      //content-part
      retS+='<div class="vleditor-editor" contenteditable="true" >';
      retS+=contentHTML;
@@ -49,6 +116,17 @@ VLEditor.stateCheck=function(idStr){
             $(idStr+" .vleditor-"+btnName+"-btn").removeClass("vleditor-btn-chosen");
         }
     };
+    /* menuOpenCheck: check the menu open or not
+     * and modify the state of the buttons
+     */
+    var menuOpenCheck=function(menuName,btnName){
+        if ($(idStr+" .vleditor-"+menuName).css("display") === "none"){
+            $(idStr+" .vleditor-"+btnName+"-btn").removeClass("vleditor-btn-chosen");
+        }else{
+            $(idStr+" .vleditor-"+btnName+"-btn").addClass("vleditor-btn-chosen");
+        }
+    }
+
     propertyCheck("bold","bold");
     propertyCheck("italic","italic");
     propertyCheck("underline","underline");
@@ -56,6 +134,8 @@ VLEditor.stateCheck=function(idStr){
     propertyCheck("justifyLeft","alignleft");
     propertyCheck("justifyRight","alignright");
     propertyCheck("justifyCenter","aligncenter");
+    menuOpenCheck("textColorMenu","textcolor");
+    menuOpenCheck("textSizeMenu","textsize");
 };
 
 
@@ -118,6 +198,30 @@ VLEditor.buildEditor=function(id){
     //outdent btn
     $(idStr+" .vleditor-orderedlist-btn").click(function(){
         document.execCommand("insertOrderedList",false);
+    });
+
+    //textcolor btn
+    $(idStr+" .vleditor-textcolor-btn").click(function(){
+        VLEditor.textColorChooser.toggle(idStr);
+    });
+
+    //textcolor menu btn - in the menu
+    $(idStr+" .vleditor-textColorMenu-btn").click(function(){
+        VLEditor.textColorChooser.toggle(idStr);
+        var colorValue=VLEditor.textColorChooser.colorList[$(this).parent().index()][0];
+        document.execCommand("foreColor",false,colorValue);
+    });
+
+    //textsize btn
+    $(idStr+" .vleditor-textsize-btn").click(function(){
+        VLEditor.textSizeChooser.toggle(idStr);
+    });
+
+    //textsize menu btn - in the menu
+    $(idStr+" .vleditor-textSizeMenu-btn").click(function(){
+        VLEditor.textSizeChooser.toggle(idStr);
+        var textSize=$(this).parent().index();
+        document.execCommand("fontSize",false,textSize);
     });
 
     $(idStr+" .vleditor-btn").click(function(){

@@ -8,7 +8,7 @@ Default icons is created by http://www.icons8.com, published under CC-by-nd 3.0 
 
 ##Features
 * Only based on jQuery
-* Only use the APIs which are supported well in different borrowers.
+* Only use the APIs which are supported well in different borrowers. (IE 9+, Firefox 4+)
 * Lightweight and simple
 * Full of comments and hackable.
 
