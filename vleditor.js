@@ -74,12 +74,13 @@ VLEditor.textSizeChooser.buildMenu=function(){
 
 /* linkCreator: build a link*/
 VLEditor.linkCreator={};
-VLEditor.linkCreator.toggle=function(idStr){
+VLEditor.linkCreator.toggle=function(idStr,state){
 
     var form=$(idStr+" .vleditor-linkCreator-form");
     var editor=$(idStr+" .vleditor-editor");
     var i;
     if (form.css("display") === "none"){
+        if (state === false) return;
         //save the selected range
         var selectionObj=getSelection();
         VLEditor.linkCreator.selectedRangeList=[];
@@ -92,6 +93,7 @@ VLEditor.linkCreator.toggle=function(idStr){
         form.css("top",offTop);
         form.fadeIn();
     }else{
+        if (state === true) return;
         //editor["0"].contentEditable="true";
         document.getSelection().removeAllRanges();
         for (i=0;i<VLEditor.linkCreator.selectedRangeList.length;++i){
@@ -110,11 +112,12 @@ VLEditor.linkCreator.buildFormHTML=function(){
 };
 /* imageInserter: insert a image */
 VLEditor.imageInserter={};
-VLEditor.imageInserter.toggle=function(idStr){
+VLEditor.imageInserter.toggle=function(idStr,state){
     var form=$(idStr+" .vleditor-imageInsert-form");
     var editor=$(idStr+" .vleditor-editor");
     var i;
     if (form.css("display") === "none"){
+        if (state === false) return;
         //save the selected range
         var selectionObj=getSelection();
         VLEditor.imageInserter.selectedRangeList=[];
@@ -127,6 +130,7 @@ VLEditor.imageInserter.toggle=function(idStr){
         form.css("top",offTop);
         form.fadeIn();
     }else{
+        if (state === true) return;
         //editor["0"].contentEditable="true";
         document.getSelection().removeAllRanges();
         for (i=0;i<VLEditor.imageInserter.selectedRangeList.length;++i){
@@ -305,6 +309,7 @@ VLEditor.buildEditor=function(id){
 
     //link btn
     $(idStr+" .vleditor-link-btn").click(function(){
+        VLEditor.imageInserter.toggle(idStr,false);
         VLEditor.linkCreator.toggle(idStr);
     });
     $(idStr+" .vleditor-linkCreator-form-cancel").click(function(){
@@ -319,6 +324,7 @@ VLEditor.buildEditor=function(id){
     });
     //image btn
     $(idStr+" .vleditor-insertimage-btn").click(function(){
+        VLEditor.linkCreator.toggle(idStr,false);
         VLEditor.imageInserter.toggle(idStr);
     });
     $(idStr+" .vleditor-imageInsert-form-cancel").click(function(){
