@@ -225,7 +225,7 @@ VLEditor.stateCheck=function(idStr){
 VLEditor.buildEditor=function(id,resPath){
     this.resPath=resPath;
     var idStr="#"+id;
-    var VLEDITOR_HTML=this.build_vleditor_html("<p> this is a param</p>");
+    var VLEDITOR_HTML=this.build_vleditor_html("");
     $(idStr).html(VLEDITOR_HTML);
     //document.execCommand("styleWithCSS",false,true);
 
@@ -338,7 +338,7 @@ VLEditor.buildEditor=function(id,resPath){
 
     $(idStr+" .vleditor-btn").click(function(){
         VLEditor.stateCheck(idStr);
-    })
+    });
     $(idStr).click(function(){
         VLEditor.stateCheck(idStr);
     });
@@ -346,3 +346,7 @@ VLEditor.buildEditor=function(id,resPath){
         VLEditor.stateCheck(idStr);
     });
 };
+
+VLEditor.getContentHTML=function(id){
+    return $("#"+id+" .vleditor-editor").html();
+}

@@ -6,7 +6,7 @@ It's a document about how to use VLEditor.
   $(document).ready(function(){
       VLEditor.buildEditor("editor1","res/");
       /* the first argument is the id of a div
-       * the second argument is the path of resource file 
+       * the second argument is the path of resource file
        */
   });
 </pre>
@@ -25,6 +25,7 @@ VLEditor.imageInserter
 VLEditor.build_vleditor_html
 VLEditor.stateCheck
 VLEditor.buildEditor
+VLEditor.getContentHTML
 </pre>
 
 And here is the introduction to them.
@@ -48,3 +49,6 @@ It's used for checking the state of text and controlling the style of buttons. F
 
 ###VLEditor.buildEditor
 Put the HTML string build by build_vleditor_html into the division and bind events.
+
+###VLEditor.getContentHTML
+Return the HTML String of editor content by id.
