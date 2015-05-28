@@ -105,8 +105,8 @@ VLEditor.linkCreator.toggle=function(idStr,state){
 VLEditor.linkCreator.buildFormHTML=function(){
     retS='<div class="vleditor-linkCreator-form" style="position:absolute;padding:2em;border:1px solid grey; background-color:rgba(255,255,255,0.8);display:none;">';
     retS+='Link Target URL:<input type="text" class="vleditor-linkCreator-form-url" />';
-    retS+='<a href="#" class="vleditor-btn vleditor-linkCreator-form-ok"><img src="res/Checkmark-50.png"></a>'
-    retS+='<a href="#" class="vleditor-btn vleditor-linkCreator-form-cancel"><img src="res/Crossmark-50.png"></a>';
+    retS+='<a href="#" class="vleditor-btn vleditor-linkCreator-form-ok"><img src="'+ VLEditor.resPath + 'Checkmark-50.png"></a>'
+    retS+='<a href="#" class="vleditor-btn vleditor-linkCreator-form-cancel"><img src="' + VLEditor.resPath + 'Crossmark-50.png"></a>';
     retS+="</div>";
     return retS;
 };
@@ -142,8 +142,8 @@ VLEditor.imageInserter.toggle=function(idStr,state){
 VLEditor.imageInserter.buildFormHTML=function(){
     retS='<div class="vleditor-imageInsert-form" style="position:absolute;padding:2em;border:1px solid grey; background-color:rgba(255,255,255,0.8);display:none;">';
     retS+='Image File URL:<input type="text" class="vleditor-imageInsert-form-url" />';
-    retS+='<a href="#" class="vleditor-btn vleditor-imageInsert-form-ok"><img src="res/Checkmark-50.png"></a>'
-    retS+='<a href="#" class="vleditor-btn vleditor-imageInsert-form-cancel"><img src="res/Crossmark-50.png"></a>';
+    retS+='<a href="#" class="vleditor-btn vleditor-imageInsert-form-ok"><img src="'+VLEditor.resPath + 'Checkmark-50.png"></a>'
+    retS+='<a href="#" class="vleditor-btn vleditor-imageInsert-form-cancel"><img src="'+VLEditor.resPath +'Crossmark-50.png"></a>';
     retS+="</div>";
     return retS;
 };
@@ -155,23 +155,23 @@ VLEditor.imageInserter.buildFormHTML=function(){
 VLEditor.build_vleditor_html=function(contentHTML) {
      var retS='<div class="vleditor-btnbar">';
      //button bar part
-     retS+='<a href="#" class="vleditor-btn vleditor-bold-btn"><img src="res/Bold-50.png" alt="blod"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-italic-btn"><img src="res/Italic-50.png" alt="italic"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-underline-btn"><img src="res/Underline-50.png" alt="underline"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-strikethrough-btn"><img src="res/Strikethrough-50.png" alt="strikethrough"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-alignleft-btn"><img src="res/AlignLeft-50.png" alt="alignleft"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-aligncenter-btn"><img src="res/AlignCenter-50.png" alt="aligncenter"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-alignright-btn"><img src="res/AlignRight-50.png" alt="alignright"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-bold-btn"><img src="'+VLEditor.resPath + 'Bold-50.png" alt="blod"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-italic-btn"><img src="'+VLEditor.resPath + 'Italic-50.png" alt="italic"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-underline-btn"><img src="' +VLEditor.resPath + 'Underline-50.png" alt="underline"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-strikethrough-btn"><img src="' +VLEditor.resPath + 'Strikethrough-50.png" alt="strikethrough"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-alignleft-btn"><img src="' +VLEditor.resPath + 'AlignLeft-50.png" alt="alignleft"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-aligncenter-btn"><img src="' +VLEditor.resPath + 'AlignCenter-50.png" alt="aligncenter"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-alignright-btn"><img src="'+VLEditor.resPath +'AlignRight-50.png" alt="alignright"></a>';
      retS+='<br>';
-     retS+='<a href="#" class="vleditor-btn vleditor-indent-btn"><img src="res/Indent-50.png" alt="indent"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-outdent-btn"><img src="res/Outdent-50.png" alt="outdent"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-unorderedlist-btn"><img src="res/List.png" alt="unorderedlist"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-orderedlist-btn"><img src="res/OrderedList-50.png" alt="orderedlist"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-link-btn"><img src="res/Link-50.png" alt="link"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-unlink-btn"><img src="res/DeleteLink-50.png" alt="link"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-insertimage-btn"><img src="res/InsertImage-50.png" alt="link"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-textcolor-btn"><img src="res/TextColor-50.png" alt="textcolor"></a>';
-     retS+='<a href="#" class="vleditor-btn vleditor-textsize-btn"><img src="res/TextSize.png" alt="textsize"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-indent-btn"><img src="'+VLEditor.resPath +'Indent-50.png" alt="indent"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-outdent-btn"><img src="'+VLEditor.resPath +'Outdent-50.png" alt="outdent"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-unorderedlist-btn"><img src="'+VLEditor.resPath +'List.png" alt="unorderedlist"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-orderedlist-btn"><img src="'+VLEditor.resPath +'OrderedList-50.png" alt="orderedlist"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-link-btn"><img src="'+VLEditor.resPath +'Link-50.png" alt="link"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-unlink-btn"><img src="'+VLEditor.resPath +'DeleteLink-50.png" alt="link"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-insertimage-btn"><img src="'+VLEditor.resPath +'InsertImage-50.png" alt="link"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-textcolor-btn"><img src="'+VLEditor.resPath +'TextColor-50.png" alt="textcolor"></a>';
+     retS+='<a href="#" class="vleditor-btn vleditor-textsize-btn"><img src="'+VLEditor.resPath +'TextSize.png" alt="textsize"></a>';
      retS+='</div>';
      retS+=VLEditor.textColorChooser.buildMenu();
      retS+=VLEditor.textSizeChooser.buildMenu();
@@ -222,7 +222,8 @@ VLEditor.stateCheck=function(idStr){
 };
 
 
-VLEditor.buildEditor=function(id){
+VLEditor.buildEditor=function(id,resPath){
+    this.resPath=resPath;
     var idStr="#"+id;
     var VLEDITOR_HTML=this.build_vleditor_html("<p> this is a param</p>");
     $(idStr).html(VLEDITOR_HTML);

@@ -4,7 +4,10 @@ It's a document about how to use VLEditor.
 ##Build a editor
 <pre>
   $(document).ready(function(){
-      VLEditor.buildEditor("editor1");
+      VLEditor.buildEditor("editor1","res/");
+      /* the first argument is the id of a div
+       * the second argument is the path of resource file 
+       */
   });
 </pre>
 
